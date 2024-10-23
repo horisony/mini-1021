@@ -1,0 +1,19 @@
+<!--index.wxml-->
+<navigation-bar title="Weixin" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <scroll-view class="chat-container" scroll-y scroll-into-view="{{scrollToView}}">
+      <view class="chat-content">
+        <block wx:for="{{chatHistory}}" wx:key="index">
+          <view class="message {{item.role === 'user' ? 'user' : 'assistant'}}">
+            <text selectable="true">{{item.content}}</text>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+    <view class="input-container">
+      <input class="chat-input" value="{{inputText}}" bindinput="onInputChange" placeholder="输入消息..." confirm-type="send" bindconfirm="sendMessage" />
+      <button class="send-button" bindtap="sendMessage" disabled="{{isWaitingForResponse}}">发送</button>
+    </view>
+  </view>
+</scroll-view>
